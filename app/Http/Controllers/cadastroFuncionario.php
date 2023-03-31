@@ -3,23 +3,23 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\cadastroFuncionarioModel;
+use App\Models\Funcionario;
 
 class cadastroFuncionario extends Controller
 {
     public function buscaCadastroFuncionario(){
         return View('cadastroFuncionario');
     }
-    public function cadastrarFuncionarioModel(Request $request){
-        $dadosFuncionario = $request->validade([
-            'nome' => 'string|required',
-            'email' => 'string|required',
+    public function cadastrarFuncionario(Request $request){
+        $dadosFuncionario = $request->validate([
+            'emailfun' => 'string|required',
+            'nomefun' => 'string|required',
+            'senha' => 'string|required',
             'whatsapp' => 'string|required',
-            'cpf' => 'string|required',
-            'senha'=> 'string|required'
+            'cpf' => 'string|required'
         ]);
-
-        cadastrarFuncionarioModel::create($dadosFuncionario);
+        
+        cadastroFuncionario::create($dadosFuncionario);
 
         return Redirect::route('/home');
 
