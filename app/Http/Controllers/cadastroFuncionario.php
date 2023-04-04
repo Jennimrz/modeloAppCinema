@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Http\Request;
 use App\Models\Funcionario;
 
@@ -16,12 +17,12 @@ class cadastroFuncionario extends Controller
             'nomefun' => 'string|required',
             'senha' => 'string|required',
             'whatsapp' => 'string|required',
-            'cpf' => 'string|required'
+            'cpf' => 'string|required',
         ]);
         
-        cadastroFuncionario::create($dadosFuncionario);
+        Funcionario::create($dadosFuncionario);
 
-        return Redirect::route('/home');
+        return Redirect::route('cadastro-funcionario');
 
     }
 }
