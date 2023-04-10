@@ -14,15 +14,20 @@ class cadastroFilme extends Controller
         return View('cadastroFilme');
     }
     public function cadastrarFilme(Request $request){
-        $dadosFilme = $request->validate([
+        $dadosfilme = $request->validate([
             'filme' => 'string|required',
             'ator' => 'string|required',
             'datalanca' => 'string|required',
             'sinopse' => 'string|required',
-            'capa' => 'string|required',       
+            'capa' => 'file|required',       
         ]);
+       
 
-        Filme::create($dadosFilme);
+        $file = $dadosfilme['capa'];
+        $path = $file->store('capa', 'public');
+        $dadosfilme['capa'] = $path;
+
+        Filme::create($dadosfilme);
 
         return Redirect::route('cadastro-filme');
     }
